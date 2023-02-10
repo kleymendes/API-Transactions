@@ -1,7 +1,8 @@
 import express, { Request, Response } from 'express';
 import { User } from './classes';
-import { UserController } from './controller';
-import { validationUserExists, CPFvalidator, validationData } from './middlewares';
+import { TransactionsController, UserController } from './controller';
+import { validationUserExists, CPFvalidator, validationData, validationDataTransaction, validationTypetransaction, validationTransactionExists } from './middlewares';
+
 
 
 const app = express();
@@ -17,24 +18,32 @@ app.get('/', (request: Request, response: Response) => {
 
 export const listUsers: Array<User> = [];
 const userController = new UserController()
+const transactionController = new TransactionsController();
 
 // POST
-app.post('/users', validationData, CPFvalidator, userController.createUser);
+app.post('/users', validationData, CPFvalidator, userController.createUser)
 
 // GET - ID - não pode mostrar a lista de transações
-app.get('/users/:id', validationUserExists, userController.getUserById);
+app.get('/users/:id', validationUserExists, userController.getUserById)
+
 
 // GET USERS - query cpf, name, email
-app.get('/users', userController.getUsers);
+app.get('/users', userController.getUsers)
 
 // PUT - 
 app.put('/users/:id', validationUserExists, userController.updateUser)
 
 
 // DELETE - USER
+app.delete('/users/:id', validationUserExists, userController.deleteUser)
 
 
+// TRANSACTIONS
+// POST - nova transação
+app.post('/users/:id/transactions', validationUserExists, validationDataTransaction, validationTypetransaction, transactionController.createTransaction )
 
+//GET - by id
+app.get('/users/:id/transactions/:idTransaction', validationUserExists, validationTransactionExists, transactionController.getTransactionById )
 
 
 

@@ -8,29 +8,19 @@ export interface TransactionDTO {
 
 export class Transaction {
   private _id: string;
-  private _title: string;
-  private _value: number;
-  private _type: 'income' | 'outcome';
+  title: string;
+  value: number;
+  type: 'income' | 'outcome';
 
   constructor(params: TransactionDTO){
     this._id = uuid()
-    this._title = params.title;
-    this._value = params.value;
-    this._type = params.type
+    this.title = params.title;
+    this.value = params.value;
+    this.type = params.type
   }
 
   get id(){
     return this._id;
-  }
-  get title() {
-    return this._title;
-  }
-  get value() {
-    return this._value;
-  }
-
-  get type() {
-    return this._type;
   }
 
   handleProperties() {

@@ -28,83 +28,92 @@ export class UserController {
 
   getUsers(request: Request, response: Response) {
     try {
-        const { name, email, cpf } = request.query;
+      const { name, email, cpf } = request.query;
 
-        const users = listUsers.filter((user) => {
-          if (name && email && cpf) {
-            return (
-              user.name.includes(name as string) &&
-              user.cpf.includes(cpf as string) &&
-              user.email.includes(email as string)
-            );
-          }
+      const users = listUsers.filter((user) => {
+        if (name && email && cpf) {
+          return (
+            user.name.includes(name as string) &&
+            user.cpf.includes(cpf as string) &&
+            user.email.includes(email as string)
+          );
+        }
 
-          if (name || email || cpf) {
-            return (
-              user.name.includes(name as string) ||
-              user.cpf.includes(cpf as string) ||
-              user.email.includes(email as string)
-            );
-          }
+        if (name || email || cpf) {
+          return (
+            user.name.includes(name as string) ||
+            user.cpf.includes(cpf as string) ||
+            user.email.includes(email as string)
+          );
+        }
 
-          return true;
-        });
+        return true;
+      });
 
-        return response
-          .status(201)
-          .json({
-            users: users.map((user) => user.handleProperties()),
-            message: 'its list, bro',
-          });
-        
+      return response.status(201).json({
+        users: users.map((user) => user.handleProperties()),
+        message: 'its list, bro',
+      });
     } catch (error) {
-        return response.status(400).send({
-          message: error,
-        });
+      return response.status(400).send({
+        message: error,
+      });
     }
   }
 
   getUserById(request: Request, response: Response) {
     try {
-        const { id } = request.params;
+      const { id } = request.params;
 
-        const user = listUsers.find((user) => user.id === id) as User;
+      const user = listUsers.find((user) => user.id === id) as User;
 
-        return response
-          .status(201)
-          .json({ user: user.handleProperties(), message: 'its list, bro' });
-
+      return response
+        .status(201)
+        .json({ user: user.handleProperties(), message: 'its list, bro' });
     } catch (error) {
-         return response.status(400).send({
-           message: error,
-         });
+      return response.status(400).send({
+        message: error,
+      });
     }
   }
 
   updateUser(request: Request, response: Response) {
     try {
-        const { id } = request.params;
-        const { name, email, cpf, age } = request.body;
+      const { id } = request.params;
+      const { name, email, cpf, age } = request.body;
 
-        const newCPF = cpf.replace(/[^a-zA-Z0-9]/g, '');
+      const newCPF = cpf.replace(/[^a-zA-Z0-9]/g, '');
 
-        const userIndex = listUsers.findIndex((user) => user.id === id);
+      const userIndex = listUsers.findIndex((user) => user.id === id);
 
-        listUsers[userIndex].name = name ?? listUsers[userIndex].name;
-        listUsers[userIndex].email = email ?? listUsers[userIndex].email;
-        listUsers[userIndex].cpf = newCPF ?? listUsers[userIndex].cpf;
-        listUsers[userIndex].age = age ?? listUsers[userIndex].age;
+      listUsers[userIndex].name = name ?? listUsers[userIndex].name;
+      listUsers[userIndex].email = email ?? listUsers[userIndex].email;
+      listUsers[userIndex].cpf = newCPF ?? listUsers[userIndex].cpf;
+      listUsers[userIndex].age = age ?? listUsers[userIndex].age;
 
-        return response.status(200).json({
-          user: listUsers[userIndex].handleProperties(),
-          message: 'its list, bro',
-        });
+      return response.status(200).json({
+        user: listUsers[userIndex].handleProperties(),
+        message: 'its list, bro',
+      });
     } catch (error) {
-        return response.status(400).send({
-          message: error,
-        });
+      return response.status(400).send({
+        message: error,
+      });
     }
   }
 
+  deleteUser(request: Request, response: Response) {
+    try {
+      const { id } = request.params;
 
+      const userIndex = listUsers.findIndex((user) => user.id === id);
+
+      listUsers.splice(userIndex, 1);
+      return response.status(200).send({ message: 'Delete with success bro!' });
+    } catch (error) {
+      return response.status(400).send({
+        message: error,
+      });
+    }
+  }
 }

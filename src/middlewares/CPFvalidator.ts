@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { listUsers } from '..';
 
+
 export const CPFvalidator = (request: Request, response: Response, next: NextFunction) => {
   const { cpf } = request.body;
 
