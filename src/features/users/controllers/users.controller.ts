@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import { listUsers } from '..';
-import { User } from '../classes';
+import { listUsers } from '../../../database';
+import { User } from '../../../models';
 
 export class UserController {
   createUser(request: Request, response: Response) {

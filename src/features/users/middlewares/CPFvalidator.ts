@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import { listUsers } from '..';
+import { listUsers } from '../../../database';
 
 
 export const CPFvalidator = (request: Request, response: Response, next: NextFunction) => {

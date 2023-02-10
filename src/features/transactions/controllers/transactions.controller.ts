@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import { listUsers } from '..';
-import { Transaction } from '../classes';
+import { listUsers } from '../../../database';
+import { Transaction } from '../../../models';
 
 export class TransactionsController {
     createTransaction(request: Request, response: Response){

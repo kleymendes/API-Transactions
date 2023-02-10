@@ -1,6 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import { listUsers } from '..';
-
+import { listUsers } from '../../../database';
 
 export const validationUserExists = (request: Request, response: Response, next: NextFunction ) => {
     const { id } = request.params

@@ -1,4 +1,4 @@
-import { Transaction } from "./transaction";
+import { Transaction } from "./transaction.model";
 import { v4 as uuid} from 'uuid';
 
 
