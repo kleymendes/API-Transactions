@@ -7,7 +7,7 @@ const transactionRoutes = (router: Router) => {
     const transactionController = new TransactionsController();
 
 
-    // POST - nova transação
+    // POST - new transaction
     router.post(
         '/users/:id/transactions',
         validationUserExists,
@@ -22,6 +22,13 @@ const transactionRoutes = (router: Router) => {
         validationUserExists,
         validationTransactionExists,
         transactionController.getTransactionById
+    );
+
+    //GET - by user all transactions and balance
+    router.get(
+        '/users/:id/transactions',
+        validationUserExists,
+        transactionController.getTransactionsByUser
     );
 }
 

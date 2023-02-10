@@ -39,4 +39,28 @@ export class User {
       age: this.age,
     }
   }
+
+  handleBalance() {
+    let income = 0;
+    let outcome = 0;
+
+    this.transactions.map((transaction) => {
+      if(transaction.type === 'income') {
+        income += transaction.value;
+      }
+
+      if(transaction.type === 'outcome') {
+        outcome += transaction.value;
+      }
+
+    });
+    
+    let total = (income - outcome);
+
+    return {
+      income,
+      outcome,
+      total
+    }
+  }
 }
