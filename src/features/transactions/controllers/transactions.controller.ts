@@ -54,6 +54,8 @@ export class TransactionsController {
               });
         }
     }
+
+    
     updateTransaction(request: Request, response: Response){
         try {
             const { id, idTransaction } = request.params;
@@ -80,5 +82,22 @@ export class TransactionsController {
                 message: error,
               });
         }
+    }
+
+    deleteTransaction(request: Request, response: Response) {
+        const { id, idTransaction } = request.params;
+
+        const indexOfUser = listUsers.findIndex((user) => user.id === id);
+        const indexOfTransaction = listUsers[indexOfUser].transactions.findIndex((transaction) => transaction.id === idTransaction);
+
+       const [itemDeleted] = listUsers[indexOfUser].transactions.splice(indexOfTransaction, 1);
+
+        return response
+          .status(200)
+          .send({
+            message: 'Delete transaction success, bro',
+            transaction: itemDeleted,
+          });
+
     }
 }

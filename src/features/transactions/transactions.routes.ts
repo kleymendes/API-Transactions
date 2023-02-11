@@ -39,6 +39,14 @@ const transactionRoutes = (router: Router) => {
         validationTypetransaction,
         transactionController.updateTransaction
     );
+
+    // DELETE - delete transaction
+    router.delete(
+        '/users/:id/transactions/:idTransaction',
+        validationUserExists,
+        validationTransactionExists,
+        transactionController.deleteTransaction
+    );
 }
 
 export { transactionRoutes };
