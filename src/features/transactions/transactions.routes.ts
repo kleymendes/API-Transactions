@@ -30,6 +30,15 @@ const transactionRoutes = (router: Router) => {
         validationUserExists,
         transactionController.getTransactionsByUser
     );
+
+    // PUT - update transaction
+    router.put(
+        '/users/:id/transactions/:idTransaction',
+        validationUserExists,
+        validationTransactionExists,
+        validationTypetransaction,
+        transactionController.updateTransaction
+    );
 }
 
 export { transactionRoutes };
