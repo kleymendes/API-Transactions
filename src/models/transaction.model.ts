@@ -1,9 +1,9 @@
-import { v4 as uuid} from 'uuid';
+import { v4 as uuid } from 'uuid';
 
 export interface TransactionDTO {
   title: string;
   value: number;
-  type: 'income' | 'outcome'
+  type: 'income' | 'outcome';
 }
 
 export class Transaction {
@@ -12,25 +12,23 @@ export class Transaction {
   value: number;
   type: 'income' | 'outcome';
 
-  constructor(params: TransactionDTO){
-    this._id = uuid()
+  constructor(params: TransactionDTO) {
+    this._id = uuid();
     this.title = params.title;
     this.value = params.value;
-    this.type = params.type
+    this.type = params.type;
   }
 
-  get id(){
+  get id() {
     return this._id;
   }
 
   handleProperties() {
     return {
-      id: this.id, 
-      title: this.title, 
-      value: this.value, 
-      type: this.type, 
-    }
+      id: this.id,
+      title: this.title,
+      value: this.value,
+      type: this.type,
+    };
   }
 }
-
-

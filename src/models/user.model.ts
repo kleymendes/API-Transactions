@@ -1,23 +1,22 @@
-import { Transaction } from "./transaction.model";
-import { v4 as uuid} from 'uuid';
+import { Transaction } from './transaction.model';
+import { v4 as uuid } from 'uuid';
 
-
-export interface UserDTO{
-  name: string,
-  cpf: string,
-  email: string,
-  age: number,
+export interface UserDTO {
+  name: string;
+  cpf: string;
+  email: string;
+  age: number;
 }
 
 export class User {
-  private _id: string; 
+  private _id: string;
   name: string;
   cpf: string;
   email: string;
   age: number;
   transactions: Transaction[];
 
-  constructor(params: UserDTO){
+  constructor(params: UserDTO) {
     this.name = params.name;
     this.cpf = params.cpf;
     this.email = params.email;
@@ -26,7 +25,7 @@ export class User {
     this._id = uuid();
   }
 
-  get id () {
+  get id() {
     return this._id;
   }
 
@@ -37,7 +36,7 @@ export class User {
       cpf: this.cpf,
       email: this.email,
       age: this.age,
-    }
+    };
   }
 
   handleBalance() {
@@ -45,22 +44,21 @@ export class User {
     let outcome = 0;
 
     this.transactions.map((transaction) => {
-      if(transaction.type === 'income') {
+      if (transaction.type === 'income') {
         income += transaction.value;
       }
 
-      if(transaction.type === 'outcome') {
+      if (transaction.type === 'outcome') {
         outcome += transaction.value;
       }
-
     });
-    
-    let total = (income - outcome);
+
+    let total = income - outcome;
 
     return {
       income,
       outcome,
-      total
-    }
+      total,
+    };
   }
 }

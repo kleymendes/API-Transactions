@@ -67,9 +67,7 @@ export class UserController {
 
       const user = listUsers.find((user) => user.id === id) as User;
 
-      return response
-        .status(201)
-        .json({ user: user.handleProperties(), message: 'its list, bro' });
+      return response.status(201).json({ user: user.handleProperties(), message: 'its list, bro' });
     } catch (error) {
       return response.status(400).send({
         message: error,
