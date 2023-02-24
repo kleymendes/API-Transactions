@@ -7,7 +7,7 @@ const routesApp = (app: Application) => {
   const router = express.Router();
 
   app.use('/', router);
-  router.get('/', (request: Request, response: Response) => response.send(initialPage));
+  router.get('/', (request: Request, response: Response) => response.send('API TRANSACTIONS'));
 
   // rotas da aplicação/features
   userRoutes(router);
