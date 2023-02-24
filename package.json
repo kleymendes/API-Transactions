@@ -32,7 +32,7 @@
   },
   "scripts": {
     "start": "node ./dist/server.js",
-    "build": "npx tsc && node ./dist/server.js",
+    "build": "npx tsc",
     "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
     "lint": "eslint . --ext .ts"
   }
